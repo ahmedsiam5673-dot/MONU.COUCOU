@@ -1,0 +1,35 @@
+[package]
+name = "monu"
+version = "0.1.0"
+description = "Monu: a tiny companion for your AI coding agents"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-autostart = "2"
+tauri-plugin-http = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["net", "io-util", "sync", "time", "macros", "rt"] }
+keyring = { version = "3", features = ["windows-native"] }
+dirs = "5"
+raw-window-handle = "0.6"
+base64 = "0.22"
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = [
+  "Foundation",
+  "Media_Control",
+  "Win32_System_WinRT",
+] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

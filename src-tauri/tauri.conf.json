@@ -1,0 +1,57 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Monu",
+  "version": "0.1.0",
+  "identifier": "dev.monu.app",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "vite",
+    "beforeBuildCommand": "npm run build:web"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Monu",
+        "url": "index.html",
+        "width": 560,
+        "height": 600,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "shadow": false,
+        "focus": false,
+        "visible": false,
+        "dragDropEnabled": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data: blob:; media-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ipc: http://ipc.localhost https://api.anthropic.com https://api.openai.com https://generativelanguage.googleapis.com https://api.github.com https://api.vercel.com https://api.stripe.com http://localhost:* http://127.0.0.1:*"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "msi",
+      "nsis"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ],
+    "externalBin": [
+      "binaries/monu-hook"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser"
+      }
+    }
+  }
+}
